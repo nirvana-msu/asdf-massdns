@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+set -e
+set -o pipefail
+
+if [[ "${ASDF_INSTALL_TYPE}" != "ref" ]]; then
+    echo "NYI: Installing specific version is not currently implemented. Install using ref:<commit_hash> instead."
+    exit 1
+fi
+
+cd ${ASDF_INSTALL_PATH}
+git clone https://github.com/blechschmidt/massdns .
+git checkout ${ASDF_INSTALL_VERSION}
+make
